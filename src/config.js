@@ -5,9 +5,9 @@ dotenv.config();
 
 const config = {
   port: Number(process.env.PORT) || 3000,
-  awsRegion: process.env.AWS_REGION || "us-east-1",
+  awsRegion: process.env.AWS_REGION || "eu-north-1",
   dynamoEndpoint: process.env.DYNAMO_ENDPOINT, // e.g., http://dynamodb:8000 for local
-  carTable: process.env.CAR_TABLE || "cars",
+  carTable: process.env.CAR_TABLE || "Tester_Table",
 };
 
 module.exports = { config };
