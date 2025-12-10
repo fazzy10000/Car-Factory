@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: car-factory
+  labels:
+    app: car-factory
+spec:
+  type: ClusterIP
+  selector:
+    app: car-factory
+  ports:
+    - port: 80
+      targetPort: 3000

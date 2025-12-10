@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: car-factory
+  labels:
+    app: car-factory
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: car-factory
+  template:
+    metadata:
+      labels:
+        app: car-factory
+    spec:
+      containers:
+        - name: car-factory
+          image: your-registry/car-factory:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: AWS_REGION
+              value: "eu-north-1"
+            - name: CAR_TABLE
+              value: "Tester_Table"
+            # - name: DYNAMO_ENDPOINT
+            #   value: "http://dynamodb:8000" # only for local DynamoDB
+            # Add AWS credentials via secret or use IAM roles for service accounts (IRSA) on EKS
+            # - name: AWS_ACCESS_KEY_ID
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: aws-creds
+            #       key: access_key_id
+            # - name: AWS_SECRET_ACCESS_KEY
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: aws-creds
+            #       key: secret_access_key
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
